@@ -1,5 +1,3 @@
-# README.md
-
 # Faded Legends Guild
 
 Welcome to the Faded Legends Guild project! This application serves as a welcome page for our World of Warcraft guild, featuring a roster of guild members and links to their unique armory pages.
