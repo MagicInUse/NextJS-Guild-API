@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
 import routes from './routes';
 
 const app = express();
@@ -11,8 +12,16 @@ app.use(cors({
 }));
 app.use(express.json());
 
+// Serve static files from public_html
+app.use(express.static(path.join(__dirname, '../public_html')));
+
 // API routes
 app.use('/api', routes);
+
+// SPA fallback
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public_html/index.html'));
+});
 
 // Error handler
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {

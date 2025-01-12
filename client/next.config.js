@@ -1,8 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Remove output: 'export'
+  output: 'export',
   images: {
     unoptimized: true
+  },
+  trailingSlash: true,
+  env: {
+    NEXT_PUBLIC_API_URL: process.env.NODE_ENV === 'production' 
+      ? 'https://fadedlegends.magicapps.dev'
+      : 'http://localhost:3001'
   }
 }
 
