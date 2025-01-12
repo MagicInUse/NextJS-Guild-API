@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "clean-public": "rimraf ../public_html/*",
+    "copy-build": "xcopy /E /I /Y out\\* ..\\public_html\\",
+    "deploy": "npm run build && npm run clean-public && npm run copy-build"
   },
   "dependencies": {
     "battlenet-api-wrapper": "^1.0.0",

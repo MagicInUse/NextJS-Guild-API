@@ -1,18 +1,22 @@
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+
 import { GuildMember } from '@/types';
 import GuildRoster from '@/components/GuildRoster';
 import { Suspense } from 'react';
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
 
 async function getGuildMembers(retries = 3): Promise<GuildMember[]> {
   for (let i = 0; i < retries; i++) {
     try {
       console.log(`Attempt ${i + 1} to fetch guild members`);
       
-      const response = await fetch('http://localhost:3001/api/guild/roster', {
+      const response = await fetch(`${API_URL}/api/guild/roster`, {
         cache: 'no-store',
         headers: {
           'Content-Type': 'application/json'
-        },
-        next: { revalidate: 0 }
+        }
       });
 
       if (!response.ok) {
@@ -35,7 +39,9 @@ async function getGuildMembers(retries = 3): Promise<GuildMember[]> {
   throw new Error('Failed to fetch after retries');
 }
 
-export default function RosterPage() {
+export default async function RosterPage() {
+  const members = await getGuildMembers();
+
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Guild Roster</h1>
@@ -44,7 +50,11 @@ export default function RosterPage() {
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-300"></div>
         </div>
       }>
-        <AsyncRoster />
+        {!members?.length ? (
+          <div className="text-center text-gray-500">No members found</div>
+        ) : (
+          <GuildRoster members={members} />
+        )}
       </Suspense>
     </div>
   );

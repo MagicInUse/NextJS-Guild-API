@@ -1,4 +1,4 @@
-# Faded Legends Guild
+# &lt;Faded Legends&gt;
 
 Welcome to the Faded Legends Guild project! This application serves as a welcome page for our World of Warcraft guild, featuring a roster of guild members and links to their unique armory pages.
 
@@ -36,4 +36,4 @@ The server is built using Node.js and Express, with the following key files:
 
 ## Contributing
 
-Feel free to contribute to the project by submitting issues or pull requests. Let's make Faded Legends the best it can be!
+Feel free to contribute to the project by submitting issues or pull requests. Let's make &lt;Faded Legends&gt; the best it can be!

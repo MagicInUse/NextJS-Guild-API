@@ -1,7 +1,9 @@
-module.exports = {
-  reactStrictMode: true,
-  env: {
-    BATTLE_NET_CLIENT_ID: process.env.BATTLE_NET_CLIENT_ID,
-    BATTLE_NET_CLIENT_SECRET: process.env.BATTLE_NET_CLIENT_SECRET,
-  },
-};
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // Remove output: 'export'
+  images: {
+    unoptimized: true
+  }
+}
+
+module.exports = nextConfig
