@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const Header: React.FC = () => {
     return (
-        <header>
+        <header className="font-metamorphous">
             <h1>Faded Legends Guild</h1>
             <nav>
                 <ul>
