@@ -1,45 +1,27 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '@/components/Header';
 import GuildAchievement from '@/components/GuildAchievement';
 import { GuildInfo } from '@/types';
 
 const HomePage = () => {
     const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
-    const [guildInfo, setGuildInfo] = React.useState<GuildInfo>({
-        _links: { 
-            self: { href: '' } 
-        },
+    const [guildInfo, setGuildInfo] = useState<GuildInfo>({
+        _links: { self: { href: '' } },
         id: 0,
         name: 'Loading...',
-        realm: {
-            name: 'Loading...',
-            slug: ''
-        },
-        faction: {
-            type: '',
-            name: 'Loading...'
-        },
-        memberCount: 0,
+        realm: { name: 'Loading...', slug: '' },
+        faction: { type: '', name: 'Loading...' },
         achievementPoints: 0,
+        memberCount: 0,
         members: [],
-        crest: { 
-            emblem: { 
-                id: 0, 
-                media: '', 
-                color: '' 
-            }, 
-            border: { 
-                id: 0, 
-                media: '', 
-                color: '' 
-            }, 
-            background: { 
-                color: '' 
-            } 
+        crest: {
+          background: { color: '' },
+          border: { media: { key: { href: '' } } },
+          emblem: { media: { key: { href: '' } } }
         }
-    });
+      });
     const [error, setError] = React.useState<string | null>(null);
     const [loading, setLoading] = React.useState(true);
 

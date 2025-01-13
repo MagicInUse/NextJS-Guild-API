@@ -76,31 +76,46 @@ export interface GuildCrest {
   };
 }
 
+export interface Realm {
+  name: string;
+  slug: string;
+}
+
 export interface GuildInfo {
-  _links: any;
+  _links: {
+    self: {
+      href: string;
+    };
+  };
   id: number;
   name: string;
-  realm: string;
-  faction: string;
+  realm: Realm;
+  faction: {
+    type: string;
+    name: string;
+  };
   achievementPoints: number;
   memberCount: number;
   members: any[];
   crest: {
-    emblem: {
-      id: number;
-      media: string;
-      color: string;
-    };
-    border: {
-      id: number;
-      media: string;
-      color: string;
-    };
     background: {
       color: string;
     };
+    border: {
+      media: {
+        key: {
+          href: string;
+        };
+      };
+    };
+    emblem: {
+      media: {
+        key: {
+          href: string;
+        };
+      };
+    };
   };
-  createdTimestamp: number;
 }
 
 export interface ApiResponse<T> {
