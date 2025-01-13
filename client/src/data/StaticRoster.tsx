@@ -1,4 +1,4 @@
-import { GuildMember } from "../types";
+import { GuildMember } from "@/types";
 
 export const staticRoster: GuildMember[] = [
   {

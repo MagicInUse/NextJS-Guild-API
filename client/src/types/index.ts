@@ -43,13 +43,64 @@ export interface GuildMember {
   rank: number;
 }
 
+
+export interface GuildCrestRGBA {
+  r: number;
+  g: number;
+  b: number;
+  a: number;
+}
+
+export interface GuildCrestMedia {
+  key: { href: string };
+  id: number;
+}
+
+export interface GuildCrestElement {
+  id: number;
+  media?: GuildCrestMedia;
+  color: {
+    id: number;
+    rgba: GuildCrestRGBA;
+  };
+}
+
+export interface GuildCrest {
+  emblem: GuildCrestElement;
+  border: GuildCrestElement;
+  background: {
+    color: {
+      id: number;
+      rgba: GuildCrestRGBA;
+    };
+  };
+}
+
 export interface GuildInfo {
+  _links: any;
+  id: number;
   name: string;
   realm: string;
   faction: string;
-  achievementPoints: number;  
+  achievementPoints: number;
   memberCount: number;
-  members: GuildMember[];
+  members: any[];
+  crest: {
+    emblem: {
+      id: number;
+      media: string;
+      color: string;
+    };
+    border: {
+      id: number;
+      media: string;
+      color: string;
+    };
+    background: {
+      color: string;
+    };
+  };
+  createdTimestamp: number;
 }
 
 export interface ApiResponse<T> {

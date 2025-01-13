@@ -3,9 +3,7 @@ import {
   BattleNetInstance, 
   BattleNetTokenResponse,
   BattleNetAPIResponse, 
-  BattleNetGuildResponse,
-  GuildMember,
-  GuildInfo 
+  GuildMember
 } from '../types';
 import dotenv from 'dotenv';
 import axios from 'axios';
@@ -109,12 +107,13 @@ class BattleNetService {
     }
   }
 
-  static async getGuildInfo(): Promise<GuildInfo> {
+  static async getGuildProfile(): Promise<any> {
     try {
       const api = await this.getInstance();
+      console.log('Getting guild profile...');
       
-      const response = await api.WowGameData.axios.get<BattleNetGuildResponse>(
-        `/data/wow/guild/area-52/faded-legends`,
+      const response = await api.WowGameData.axios.get<BattleNetAPIResponse>(
+        '/data/wow/guild/area-52/faded-legends',
         {
           params: {
             namespace: 'profile-us',
@@ -122,23 +121,16 @@ class BattleNetService {
           }
         }
       );
-
-      if (!response?.data?.guild) {
-        throw new Error('Invalid guild info response');
-      }
-
-      const roster = await this.getGuildRoster();
-
-      return {
-        name: response.data.guild.name,
-        realm: response.data.guild.realm.slug,
-        faction: response.data.guild.faction.name,
-        achievementPoints: response.data.guild.achievement_points,
-        memberCount: response.data.guild.member_count,
-        members: roster
-      };
+  
+      console.log('API Response:', {
+        status: response.status,
+        hasData: !!response.data
+      });
+  
+      return response.data;
+  
     } catch (error) {
-      console.error('Guild info error:', error);
+      console.error('Guild profile error:', error);
       throw error;
     }
   }

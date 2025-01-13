@@ -1,4 +1,4 @@
-import { GuildMember } from '../types';
+import { GuildMember } from '@/types';
 
 interface GuildRosterProps {
   members: GuildMember[];
@@ -10,24 +10,36 @@ const GuildRoster: React.FC<GuildRosterProps> = ({ members }) => {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+    <ul role="list" className="divide-y divide-gray-700">
       {members.map((member) => (
-        <div 
-          key={member.character.name} 
-          className="bg-slate-800 rounded-lg shadow-lg p-4 hover:shadow-xl transition-all duration-200 hover:-translate-y-1"
-        >
-          <h3 className="text-xl font-bold text-white mb-2">
-            {member.character.name}
-          </h3>
-          <p className="text-gray-300">
-            Level {member.character.level} {member.character.class}
-          </p>
-          <p className="text-gray-400 mt-2">
-            Rank: {member.rank}
-          </p>
-        </div>
+        <li key={member.character.name} className="flex justify-between gap-x-6 py-5">
+          <div className="flex min-w-0 gap-x-4">
+            <img 
+              className="h-12 w-12 flex-none rounded-full bg-gray-800" 
+              src="/images/wow-avatar-placeholder.png" 
+              alt={member.character.name}
+            />
+            <div className="min-w-0 flex-auto">
+              <p className="text-sm font-semibold text-[#FF8000]">
+                {member.character.name}
+              </p>
+              <p className="mt-1 truncate text-xs text-gray-400">
+                Level {member.character.level} {member.character.class}
+              </p>
+            </div>
+          </div>
+          <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+            <p className="text-sm text-[#A335EE]">Rank: {member.rank}</p>
+            <div className="mt-1 flex items-center gap-x-1.5">
+              <div className="flex-none rounded-full bg-emerald-500/20 p-1">
+                <div className="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
+              </div>
+              <p className="text-xs text-gray-400">Online</p>
+            </div>
+          </div>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };
 

@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       fontFamily: {
         metamorphous: ['var(--font-metamorphous)'],
+        'warcraft': ['LifeCraft', 'serif']
       },
     },
   },

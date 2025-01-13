@@ -5,7 +5,8 @@
 @layer base {
     /* Base styles */
     body {
-      @apply bg-slate-900 text-white;
+        background-color: #131313;
+      @apply text-white;
     }
 
     a {
@@ -25,14 +26,14 @@
     }
 
     .wow-title {
-        @apply text-6xl font-bold text-center py-8;
         color: #FF8000;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        @apply text-6xl font-bold text-center py-8;
     }
 
     .nav-link {
-        @apply text-xl;
         color: #A335EE;
+        @apply text-xl;
     }
 
     .nav-link:hover {
@@ -46,12 +47,12 @@
     }
 
     .nav-banner {
-        @apply relative min-h-[444px] w-full;
         background-image: url('/images/flying.png');
         background-position: center bottom 369px;
         background-size: cover;
         background-attachment: fixed;
         background-repeat: no-repeat;
+        @apply relative min-h-[444px] w-full;
     }
   }
   
