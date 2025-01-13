@@ -78,7 +78,15 @@ const GuildRoster: React.FC<GuildRosterProps> = ({ members }) => {
               )}
               <div className="min-w-0 flex-auto">
                 <p className="text-sm font-semibold text-[#FF8000]">
-                  {member.character.name}
+                  {member.character.name}{` `}
+                <a 
+                  href={`https://worldofwarcraft.com/en-us/character/us/area-52/${member.character.name}`} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-blue-500 hover:underline"
+                > 
+                  (Armory)
+                </a>
                 </p>
                 <p className="mt-1 truncate text-xs text-gray-400">
                   Level {member.character.level} {member.character.class}
