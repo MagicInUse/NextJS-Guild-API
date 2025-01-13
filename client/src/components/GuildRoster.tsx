@@ -1,14 +1,18 @@
 import { GuildMember } from '@/types';
 
+// Define the props for the GuildRoster component
 interface GuildRosterProps {
   members: GuildMember[];
 }
 
+// Define the GuildRoster component
 const GuildRoster: React.FC<GuildRosterProps> = ({ members }) => {
+  // If there are no members, display a message
   if (!members?.length) {
     return <div className="text-center text-gray-500">No guild members found!</div>;
   }
 
+  // Render the list of guild members
   return (
     <ul role="list" className="divide-y divide-gray-700">
       {members.map((member) => (

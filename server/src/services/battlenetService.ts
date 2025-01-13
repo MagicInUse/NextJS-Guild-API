@@ -14,6 +14,7 @@ class BattleNetService {
   private static instance: BattleNetInstance | null = null;
   private static accessToken: string | null = null;
 
+  // Fetches OAuth token from Battle.net
   private static async getOAuthToken(): Promise<string> {
     try {
       const formData = new URLSearchParams();
@@ -40,6 +41,7 @@ class BattleNetService {
     }
   }
 
+  // Returns an instance of BattleNetInstance with a valid OAuth token
   static async getInstance(): Promise<BattleNetInstance> {
     try {
       if (!this.instance || !this.accessToken) {
@@ -66,6 +68,7 @@ class BattleNetService {
     }
   }
 
+  // Fetches the guild roster from Battle.net API
   static async getGuildRoster(): Promise<GuildMember[]> {
     try {
       const api = await this.getInstance();
@@ -107,6 +110,7 @@ class BattleNetService {
     }
   }
 
+  // Fetches the guild profile from Battle.net API
   static async getGuildProfile(): Promise<any> {
     try {
       const api = await this.getInstance();
