@@ -12,8 +12,10 @@ interface GuildRosterProps {
 
 // Define the GuildRoster component
 const GuildRoster: React.FC<GuildRosterProps> = ({ members }) => {
+  // State to store avatars of guild members
   const [avatars, setAvatars] = useState<{ [key: string]: string }>({});
 
+  // Fetch avatars when the component mounts or members change
   useEffect(() => {
     const getAvatars = async () => {
       try {
@@ -39,12 +41,14 @@ const GuildRoster: React.FC<GuildRosterProps> = ({ members }) => {
         <li key={member.character.name} className="flex justify-between gap-x-6 py-5">
           <div className="flex min-w-0 gap-x-4">
             {avatars[member.character.name] ? (
+              // Display avatar if available
               <img 
                 className="h-12 w-12 flex-none rounded-full bg-gray-800" 
                 src={avatars[member.character.name]} 
                 alt={member.character.name}
               />
             ) : (
+              // Display placeholder if avatar is not available
               <div className="profile-placeholder">
                 {member.character.name.charAt(0).toUpperCase()}
               </div>

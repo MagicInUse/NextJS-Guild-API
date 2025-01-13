@@ -9,6 +9,7 @@ import {
 
 dotenv.config();
 
+// BattleNetService class to interact with the Battle.net API
 class BattleNetService implements BattleNetInstance {
   private static instance: BattleNetService | null = null;
   private static accessToken: string | null = null;
@@ -17,6 +18,7 @@ class BattleNetService implements BattleNetInstance {
     axios: AxiosInstance;
   };
 
+  // Private constructor to enforce singleton pattern
   private constructor() {
     this.axiosInstance = axios.create({
       baseURL: 'https://us.api.blizzard.com',
@@ -29,6 +31,7 @@ class BattleNetService implements BattleNetInstance {
     };
   }
 
+  // Method to get OAuth token from Battle.net
   private static async getOAuthToken(): Promise<string> {
     try {
       const formData = new URLSearchParams();
@@ -55,6 +58,7 @@ class BattleNetService implements BattleNetInstance {
     }
   }
 
+  // Method to get the singleton instance of BattleNetService
   public static async getInstance(): Promise<BattleNetService> {
     if (!BattleNetService.instance) {
       BattleNetService.instance = new BattleNetService();
@@ -64,6 +68,7 @@ class BattleNetService implements BattleNetInstance {
     return BattleNetService.instance;
   }
 
+  // Method to get character media from Battle.net API
   public async getCharacterMedia(realm: string, characterName: string): Promise<any> {
     try {
       const response = await this.axiosInstance.get(
@@ -82,6 +87,7 @@ class BattleNetService implements BattleNetInstance {
     }
   }
 
+  // Static method to get guild roster from Battle.net API
   public static async getGuildRoster(): Promise<GuildMember[]> {
     try {
       const api = await this.getInstance();
@@ -123,6 +129,7 @@ class BattleNetService implements BattleNetInstance {
     }
   }
 
+  // Static method to get guild profile from Battle.net API
   public static async getGuildProfile(): Promise<any> {
     try {
       const api = await this.getInstance();
