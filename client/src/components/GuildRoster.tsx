@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { GuildMember } from '@/types';
 import { fetchAvatars } from '@/utils/fetchAvatars';
+import { getRankName } from '@/utils/rankUtils';
 
 // Define the props for the GuildRoster component
 interface GuildRosterProps {
@@ -56,6 +57,9 @@ const GuildRoster: React.FC<GuildRosterProps> = ({ members }) => {
                 Level {member.character.level} {member.character.class}
               </p>
             </div>
+          </div>
+          <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+            <p className="text-sm text-[#A335EE]">Rank: {getRankName(member.rank)}</p>
           </div>
         </li>
       ))}

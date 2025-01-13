@@ -41,7 +41,7 @@ const HomePage = () => {
                 const data = await response.json();
                 
                 // Debug log to inspect response
-                console.log('API Response:', data);
+                // console.log('API Response:', data);
     
                 // Check if data is the guild object directly
                 const guild = data.guild || data;
