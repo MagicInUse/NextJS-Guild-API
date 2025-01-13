@@ -18,9 +18,9 @@ export default function RootLayout({
   children: React.ReactNode // Define the type for children prop
 }) {
   return (
-    // Set the language of the document to English and apply the Metamorphous font class
+    // Set the language of the document to English and apply the Metamorphous font class and render the children components
     <html lang="en" className={metamorphous.className}>
-      <body>{children}</body> {/* Render the children elements inside the body */}
+      <body>{children}</body>
     </html>
   )
 }
