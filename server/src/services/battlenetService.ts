@@ -1,20 +1,34 @@
-import { AxiosInstance } from 'axios';
+import axios, { AxiosInstance } from 'axios';
+import dotenv from 'dotenv';
 import { 
   BattleNetInstance, 
   BattleNetTokenResponse,
   BattleNetAPIResponse, 
   GuildMember
 } from '../types';
-import dotenv from 'dotenv';
-import axios from 'axios';
 
 dotenv.config();
 
-class BattleNetService {
-  private static instance: BattleNetInstance | null = null;
+class BattleNetService implements BattleNetInstance {
+  private static instance: BattleNetService | null = null;
   private static accessToken: string | null = null;
+  public axiosInstance: AxiosInstance;
+  public WowGameData: {
+    axios: AxiosInstance;
+  };
 
-  // Fetches OAuth token from Battle.net
+  private constructor() {
+    this.axiosInstance = axios.create({
+      baseURL: 'https://us.api.blizzard.com',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    this.WowGameData = {
+      axios: this.axiosInstance,
+    };
+  }
+
   private static async getOAuthToken(): Promise<string> {
     try {
       const formData = new URLSearchParams();
@@ -41,40 +55,39 @@ class BattleNetService {
     }
   }
 
-  // Returns an instance of BattleNetInstance with a valid OAuth token
-  static async getInstance(): Promise<BattleNetInstance> {
-    try {
-      if (!this.instance || !this.accessToken) {
-        this.accessToken = await this.getOAuthToken();
-        
-        const axiosInstance = axios.create({
-          baseURL: 'https://us.api.blizzard.com',
-          headers: {
-            'Authorization': `Bearer ${this.accessToken}`,
-            'Content-Type': 'application/json'
-          }
-        });
+  public static async getInstance(): Promise<BattleNetService> {
+    if (!BattleNetService.instance) {
+      BattleNetService.instance = new BattleNetService();
+      BattleNetService.accessToken = await BattleNetService.getOAuthToken();
+      BattleNetService.instance.axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${BattleNetService.accessToken}`;
+    }
+    return BattleNetService.instance;
+  }
 
-        this.instance = {
-          WowGameData: {
-            axios: axiosInstance
-          }
-        };
-      }
-      return this.instance;
+  public async getCharacterMedia(realm: string, characterName: string): Promise<any> {
+    try {
+      const response = await this.axiosInstance.get(
+        `/profile/wow/character/${realm}/${characterName.toLowerCase()}/character-media`,
+        {
+          params: {
+            namespace: 'profile-us',
+            locale: 'en_US',
+          },
+        }
+      );
+      return response.data;
     } catch (error) {
-      console.error('Client init error:', error);
+      console.error(`Error fetching character media for ${characterName} on ${realm}:`, error);
       throw error;
     }
   }
 
-  // Fetches the guild roster from Battle.net API
-  static async getGuildRoster(): Promise<GuildMember[]> {
+  public static async getGuildRoster(): Promise<GuildMember[]> {
     try {
       const api = await this.getInstance();
       console.log('Getting guild roster...');
       
-      const response = await api.WowGameData.axios.get<BattleNetAPIResponse>(
+      const response = await api.axiosInstance.get<BattleNetAPIResponse>(
         '/data/wow/guild/area-52/faded-legends/roster',
         {
           params: {
@@ -110,13 +123,12 @@ class BattleNetService {
     }
   }
 
-  // Fetches the guild profile from Battle.net API
-  static async getGuildProfile(): Promise<any> {
+  public static async getGuildProfile(): Promise<any> {
     try {
       const api = await this.getInstance();
       console.log('Getting guild profile...');
       
-      const response = await api.WowGameData.axios.get<BattleNetAPIResponse>(
+      const response = await api.axiosInstance.get<BattleNetAPIResponse>(
         '/data/wow/guild/area-52/faded-legends',
         {
           params: {

@@ -57,15 +57,6 @@ const GuildRoster: React.FC<GuildRosterProps> = ({ members }) => {
               </p>
             </div>
           </div>
-          <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-            <p className="text-sm text-[#A335EE]">Rank: {member.rank}</p>
-            <div className="mt-1 flex items-center gap-x-1.5">
-              <div className="flex-none rounded-full bg-emerald-500/20 p-1">
-                <div className="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
-              </div>
-              <p className="text-xs text-gray-400">Online</p>
-            </div>
-          </div>
         </li>
       ))}
     </ul>
