@@ -54,6 +54,12 @@
         background-repeat: no-repeat;
         @apply relative min-h-[444px] w-full;
     }
+
+    .profile-placeholder {
+      @apply h-12 w-12 flex-none rounded-full bg-gray-800 flex items-center justify-center text-white;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
   }
   
   @layer utilities {
