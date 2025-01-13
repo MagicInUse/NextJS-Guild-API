@@ -1,7 +1,25 @@
 import { GuildInfo } from '@/types';
 
+interface CrestMedia {
+key: {
+    href: string;
+};
+}
+
+interface CrestPart {
+media: CrestMedia;
+}
+
+interface Crest {
+background: {
+    color: string;
+};
+border: CrestPart;
+emblem: CrestPart;
+}
+
 interface GuildAchievementProps {
-  guildInfo?: GuildInfo;
+  guildInfo: GuildInfo;
 }
 
 const GuildAchievement: React.FC<GuildAchievementProps> = ({ guildInfo }) => {
@@ -13,22 +31,26 @@ const GuildAchievement: React.FC<GuildAchievementProps> = ({ guildInfo }) => {
     return String(faction || 'Unknown');
   };
 
+  const renderGuildCrest = () => {
+    const faction = getFactionDisplay(guildInfo?.faction);
+    const crestUrl =
+        faction === 'Alliance'
+            ? 'https://images.freeimages.com/fic/images/icons/1181/flurry_extras_2/256/alliance.png?fmt=webp&w=500'
+            : 'https://images.freeimages.com/fic/images/icons/1181/flurry_extras_2/256/horde.png?fmt=webp&h=350';
+
+    return <img src={crestUrl} alt={`${faction} crest`} className="w-full h-full object-contain" />;
+  };
+
   return (
     <div className="max-w-2xl mx-auto my-4">
       <div className="bg-gradient-to-r from-[#2B2B2B] to-[#1F1F1F] border-2 border-[#4A4A4A] rounded-lg p-4 relative overflow-hidden">
         {/* Achievement Icon */}
-        <div className="absolute top-0 left-0 w-16 h-16 m-4">
-          <div className="w-full h-full rounded-full bg-[#2B2B2B] border-2 border-[#FFC125] flex items-center justify-center">
-            <img 
-              src="/images/guild-achievement.png" 
-              alt="Guild Achievement"
-              className="w-12 h-12"
-            />
-          </div>
+        <div className="absolute top-0 left-0 w-32 h-32 m-4">
+            {renderGuildCrest()}
         </div>
 
         {/* Achievement Content */}
-        <div className="ml-24">
+        <div className="ml-40">
           {/* <h2 className="text-[#FFC125] text-xl font-warcraft">
             {typeof guildInfo?.name === 'string' ? guildInfo.name : 'Loading...'}
           </h2> */}
@@ -42,7 +64,7 @@ const GuildAchievement: React.FC<GuildAchievementProps> = ({ guildInfo }) => {
               <span className="text-[#FFB100]">Faction:</span> 
               <span className={`${
                 getFactionDisplay(guildInfo?.faction) === 'Alliance' ? 'text-[#0078FF]' : 'text-[#FF0000]'
-              }`}>
+                }`}>
                 {getFactionDisplay(guildInfo?.faction)}
               </span>
             </p>

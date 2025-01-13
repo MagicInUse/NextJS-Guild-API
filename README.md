@@ -44,3 +44,7 @@ The server is built using Node.js and Express, with the following key files:
 ## Contributing
 
 Feel free to contribute to the project by submitting issues or pull requests. Let's make &lt;Faded Legends&gt; the best it can be!
+
+### References & Attributes
+
+- [Horde](https://www.freeimages.com/icon/horde-5585894) / [Alliance](https://www.freeimages.com/icon/alliance-5585888) Icons
