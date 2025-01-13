@@ -1,3 +1,63 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    /* Base styles */
+    body {
+      @apply bg-slate-900 text-white;
+    }
+
+    a {
+      color: #A335EE;
+      @apply transition-colors;
+    }
+  }
+  
+  @layer components {
+    /* Reusable component classes */
+    .btn-primary {
+      @apply px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors;
+    }
+    
+    .card {
+      @apply bg-slate-800 rounded-lg shadow-lg p-4;
+    }
+
+    .wow-title {
+        @apply text-6xl font-bold text-center py-8;
+        color: #FF8000;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-link {
+        @apply text-xl;
+        color: #A335EE;
+    }
+
+    .nav-link:hover {
+        color: #FF8000;
+    }
+
+    .nav-button {
+        @apply bg-black px-6 py-2 rounded-lg 
+               backdrop-blur-sm transition-all duration-300
+               hover:bg-black/85;
+    }
+
+    .nav-banner {
+        @apply relative min-h-[444px] w-full;
+        background-image: url('/images/flying.png');
+        background-position: center bottom 369px;
+        background-size: cover;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+    }
+  }
+  
+  @layer utilities {
+    /* Custom utilities */
+    .text-shadow {
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+  }

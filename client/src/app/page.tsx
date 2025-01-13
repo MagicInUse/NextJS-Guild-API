@@ -5,7 +5,7 @@ const HomePage = () => {
     return (
         <div>
             <Header />
-            <h1>Welcome to the Faded Legends Guild!</h1>
+            <h2>Welcome to the Faded Legends Guild web page!</h2>
             <p>Join us in our adventures in World of Warcraft!</p>
         </div>
     );

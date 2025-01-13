@@ -1,5 +1,4 @@
 import { GuildMember } from '@/types';
-import { Suspense } from 'react';
 import GuildRoster from '@/components/GuildRoster';
 import { staticRoster } from '@/data/StaticRoster';
 import RosterClient from '@/components/RosterClient';

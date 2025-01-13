@@ -2,6 +2,13 @@
 
 Welcome to the Faded Legends Guild project! This application serves as a welcome page for our World of Warcraft guild, featuring a roster of guild members and links to their unique armory pages. Check out the deployed site here: [https://fadedlegends.magicapps.dev](https://fadedlegends.magicapps.dev)
 
+## Technologies & Learning
+
+This project represents several first-time implementations:
+- First application built with Next.js 14 and its new app router
+- First time implementing Tailwind CSS for styling
+- Integration with Battle.net's API for real-time guild data
+
 ## Project Structure
 
 The project is divided into two main parts: the client and the server.
